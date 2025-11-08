@@ -1,0 +1,43 @@
+project_name: tache
+
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  - id: tache
+    main: ./cmd/tache
+    binary: tache
+    env:
+      - CGO_ENABLED=0
+    flags:
+      - -trimpath
+    ldflags:
+      - -s -w
+    goos: [linux, darwin]
+    goarch: [amd64, arm64]
+
+archives:
+  - id: tache
+    builds: [tache]
+    format: tar.gz
+    name_template: '{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}'
+    files:
+      - README.md
+      - docs/PLAN.md
+      - docs/TROUBLESHOOTING.md
+
+checksum:
+  name_template: 'checksums.txt'
+
+release:
+  draft: true
+  prerelease: false
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^chore:'
+
