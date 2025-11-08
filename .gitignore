@@ -1,0 +1,19 @@
+# Go build artifacts
+bin/
+dist/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# Editor/OS files
+.DS_Store
+.idea/
+.vscode/
+
+# Go tools
+coverage*
+
